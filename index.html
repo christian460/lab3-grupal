@@ -9,7 +9,7 @@
   <h1>Navegador de archivos Markdown </h1>
   
   <h2>Archivos Markdown Disponibles:</h2>
-  <ul id="file-list"></ul>
+  <select id="select-file"></select>
   
   
   <script>
@@ -31,7 +31,7 @@
         .catch(error => console.error(error));
     }
     
-   
+    getFileList();
   </script>
 </body>
 </html>
