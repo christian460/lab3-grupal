@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="mystyle.css">
-    </head>
-    <body>
-        <p >
-            
-        
-        </p>
-    </body>
+<head>
+  <meta charset="utf-8">
+  <title>Navegador de archivos Markdown </title>
+  
+</head>
+<body>
+  <h1>Navegador de archivos Markdown </h1>
+  
+  <h2>Archivos Markdown Disponibles:</h2>
+  <ul id="file-list"></ul>
+  
+  
+  <script>
+    // Listado de archivos Markdown 
+    function getFileList() {
+      fetch('/api/files')
+        .then(response => response.json())
+        .then(data => {
+          const fileList = data.files;
+          const selectFile = document.getElementById('select-file');
+          selectFile.innerHTML = '<option value="">Selecciona un archivo...</option>';
+          fileList.forEach(file => {
+            const option = document.createElement('option');
+            option.value = file;
+            option.text = file;
+            selectFile.appendChild(option);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+    
    
+  </script>
+</body>
 </html>
