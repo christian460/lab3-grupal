@@ -13,8 +13,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-
-
 app.get('/api/files', (req, res) => {
   fs.readdir(markdownFolder, (err, files) => {
     if (err) {
@@ -26,6 +24,22 @@ app.get('/api/files', (req, res) => {
   });
 });
 
+
+app.get('/leer', (req, res) => {
+  fs.readFile(path.join(__dirname, 'markdown-files/saludos.md'),'utf8',(err, files) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error al obtener el archivo Markdown' })
+      return
+    }  
+    res.json({ 
+      text: files.replace("#" ,'<h1>')
+      
+      
+      
+    })
+  })
+})
 
 app.listen(3000, () => {
   console.log('Servidor iniciado en http://localhost:3000');
