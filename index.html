@@ -8,19 +8,34 @@
       fetch('/leer')
         .then(response => response.json())
         .then(data => {
-          document.querySelector("#texto").innerHTML = data.text
-        })
+          document.querySelector("#texto").innerHTML = data.text;
+        });
+    }
+
+    function getFileContent() {
+      const selectFile = document.getElementById('select-file');
+      const fileName = selectFile.value;
+
+      if (fileName) {
+        fetch(`/api/files/${fileName}`)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector("#content").innerHTML = data;
+          });
+      }
     }
   </script>
 </head>
 <body>
-  <h1>Navegador de archivos Markdown </h1>
+  <h1>Navegador de archivos Markdown</h1>
   
   <h2>Archivos Markdown Disponibles:</h2>
-  <select id="select-file"></select>
+  <select id="select-file" onchange="getFileContent()"></select>
+  
+  <h2>Contenido del archivo Markdown</h2>
+  <div id="content"></div>
   
   <p id="texto"></p>
-  
   
   <script>
     // Listado de archivos Markdown 
@@ -41,9 +56,8 @@
         .catch(error => console.error(error));
     }
     getFileList();
-    
-    leer();
 
+    leer();
   </script>
 </body>
 </html>

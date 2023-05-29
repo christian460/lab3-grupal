@@ -27,6 +27,21 @@ app.get('/api/files', (req, res) => {
   });
 });
 
+//to read md content
+  ('/api/files/:fileName', (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join(markdownFolder, fileName);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error al leer el archivo Markdown' });
+    } else {
+      const htmlContent = marked(data);
+      res.send(htmlContent);
+    }
+  });
+});
 
 app.get('/leer', (req, res) => {
   fs.readFile(path.join(__dirname, 'markdown-files/saludos.md'),'utf8',(err, files) => {
