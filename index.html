@@ -3,13 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>Navegador de archivos Markdown </title>
-  
+  <script>
+    function leer() {
+      fetch('/leer')
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#texto").innerHTML = data.text
+        })
+    }
+  </script>
 </head>
 <body>
   <h1>Navegador de archivos Markdown </h1>
   
   <h2>Archivos Markdown Disponibles:</h2>
   <select id="select-file"></select>
+  
+  <p id="texto"></p>
   
   
   <script>
@@ -30,8 +40,10 @@
         })
         .catch(error => console.error(error));
     }
-    
     getFileList();
+    
+    leer();
+
   </script>
 </body>
 </html>
