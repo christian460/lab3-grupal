@@ -49,25 +49,30 @@
           .catch(error => console.error(error));
       }
     }
-function createFile(fileName) {
-      fetch('/api/files', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ fileName })
+    function createFile() {
+  const newFileName = document.getElementById('new-file-name').value;
+  if (newFileName) {
+    fetch('/api/files', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ fileName: newFileName })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Archivo creado exitosamente.');
+          getFileList();
+        } else {
+          alert('Error al crear el archivo.');
+        }
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            alert('Archivo creado exitosamente.');
-            getFileList();
-          } else {
-            alert('Error al crear el archivo.');
-          }
-        })
-        .catch(error => console.error(error));
-    }
+      .catch(error => console.error(error));
+  } else {
+    alert('Por favor, introduce un nombre de archivo válido.');
+  }
+}
     
     // Event listener para el botón "Crear Archivo"
     const createFileBtn = document.getElementById('create-file-btn');
@@ -91,8 +96,8 @@ function createFile(fileName) {
     
     // Llamar a la función getFileList al cargar la página
     window.onload = getFileList;
-    
-    getFileList();
+
+    //getFileList();
   </script>
 </body>
 </html>

@@ -41,13 +41,13 @@ app.get('/api/files/:fileName', (req, res) => {
 });
 
 app.post('/api/files', (req, res) => {
-  const { filename, content } = req.body;
-  fs.writeFile(`./markdown-files/${filename}.md`, content, (err) => {
+  const { fileName } = req.body;
+  fs.writeFile(path.join(markdownFolder, fileName), '', (err) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Error al crear el archivo' });
     } else {
-      res.json({ message: 'File created successfully' });
+      res.json({ success: true });
     }
   });
 });
