@@ -163,11 +163,15 @@ Ejecución:
 ## EJERCICIOS PROPUESTOS
 -	En grupos de 3 a 5 personas implemente una aplicación web que navegue sobre archivos Markdown y permita:
   1.	Listas los archivos Markdown disponibles
+
+  ![Nuevo Proyecto GitHub](readdir.png)
+  
       Se utiliza el método readdir() para poder leer el directorio que se desea utilizar para guardar los archivos Markdown.
       
-      ![Nuevo Proyecto GitHub](writeFile.png)
+  ![Nuevo Proyecto GitHub](readdir2.png)
 
       La función getFileList() se encarga de recibir la información y crea una caja de selección con los archivos Markdown disponibles en el directorio.
+      ![Nuevo Proyecto GitHub](readdir.png)
   2.	Ver el contenido de un archivo Markdown traducido a HTML
   
   ![Nuevo Proyecto GitHub](Aspose.Words.83c27ca6-c496-4177-afd1-53d0e505bbf7.036.png)
@@ -177,16 +181,16 @@ Ejecución:
       La función getFileContent() se encarga de recuperar la información del archivo que se quiere motrar.
   3.	Crear nuevos archivos MarkDown y almacenarlos en el servidor
   
-      ![Nuevo Proyecto GitHub](writeFile.png)
+  ![Nuevo Proyecto GitHub](writeFile.png)
 
       Utilizando el método writeFile() para poder crear un archivo del formato Markdown
       Ejecución:
       
-       ![Nuevo Proyecto GitHub](ejecucion1.png)
+  ![Nuevo Proyecto GitHub](ejecucion1.png)
        
-       ![Nuevo Proyecto GitHub](ejecucion2.png)
+  ![Nuevo Proyecto GitHub](ejecucion2.png)
        
-       ![Nuevo Proyecto GitHub](ejecucion3.png)
+  ![Nuevo Proyecto GitHub](ejecucion3.png)
       
 - La comunicación entre el cliente y el servidor tiene que ser usando JSON sólamente. El cliente debe usar AJAX para sus peticiones El servidor debe usar NodeJS Su aplicación debe ser de página única, es decir que sólo habrá un archivo index.html y nada más.
 
