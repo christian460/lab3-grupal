@@ -3,28 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Navegador de archivos Markdown </title>
-  <script>
-    function leer() {
-      fetch('/leer')
-        .then(response => response.json())
-        .then(data => {
-          document.querySelector("#texto").innerHTML = data.text;
-        });
-    }
-
-    function getFileContent() {
-      const selectFile = document.getElementById('select-file');
-      const fileName = selectFile.value;
-
-      if (fileName) {
-        fetch(`/api/files/${fileName}`)
-          .then(response => response.text())
-          .then(data => {
-            document.querySelector("#content").innerHTML = data;
-          });
-      }
-    }
-  </script>
 </head>
 <body>
   <h1>Navegador de archivos Markdown</h1>
@@ -35,10 +13,11 @@
   <h2>Contenido del archivo Markdown</h2>
   <div id="content"></div>
   
-  <p id="texto"></p>
-  
+  <h2>Crear Nuevo Archivo Markdown:</h2>
+  <input type="text" id="new-file-name" placeholder="Nombre del archivo.md">
+  <button id="create-file-btn">Crear Archivo</button>
+
   <script>
-    // Listado de archivos Markdown 
     function getFileList() {
       fetch('/api/files')
         .then(response => response.json())
@@ -55,9 +34,65 @@
         })
         .catch(error => console.error(error));
     }
-    getFileList();
+    
+    function getFileContent() {
+      const selectFile = document.getElementById('select-file');
+      const fileName = selectFile.value;
 
-    leer();
+      if (fileName) {
+        fetch(`/api/files/${fileName}`)
+          .then(response => response.text())
+          .then(data => {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = data;
+          })
+          .catch(error => console.error(error));
+      }
+    }
+function createFile(fileName) {
+      fetch('/api/files', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fileName })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Archivo creado exitosamente.');
+            getFileList();
+          } else {
+            alert('Error al crear el archivo.');
+          }
+        })
+        .catch(error => console.error(error));
+    }
+    
+    // Event listener para el botón "Crear Archivo"
+    const createFileBtn = document.getElementById('create-file-btn');
+    createFileBtn.addEventListener('click', () => {
+      const newFileName = document.getElementById('new-file-name').value;
+      if (newFileName) {
+        createFile(newFileName);
+      } else {
+        alert('Por favor, introduce un nombre de archivo válido.');
+      }
+    });
+    
+    // Event listener para el cambio de selección de archivo
+    const selectFile = document.getElementById('select-file');
+    selectFile.addEventListener('change', () => {
+      const selectedFile = selectFile.value;
+      if (selectedFile) {
+        getFileContent(selectedFile);
+      }
+    });
+    
+    // Llamar a la función getFileList al cargar la página
+    window.onload = getFileList;
+    
+    getFileList();
   </script>
 </body>
 </html>

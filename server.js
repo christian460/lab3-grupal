@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -22,13 +20,12 @@ app.get('/api/files', (req, res) => {
       res.status(500).json({ error: 'Error al obtener la lista de archivos Markdown' });
     } else {
       const markdownFiles = files.filter(file => path.extname(file).toLowerCase() === ".md");
-      res.json({ files : markdownFiles});
+      res.json({ files: markdownFiles });
     }
   });
 });
 
-//to read md content
-  ('/api/files/:fileName', (req, res) => {
+app.get('/api/files/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   const filePath = path.join(markdownFolder, fileName);
 
@@ -43,21 +40,17 @@ app.get('/api/files', (req, res) => {
   });
 });
 
-app.get('/leer', (req, res) => {
-  fs.readFile(path.join(__dirname, 'markdown-files/saludos.md'),'utf8',(err, files) => {
+app.post('/api/files', (req, res) => {
+  const { filename, content } = req.body;
+  fs.writeFile(`./markdown-files/${filename}.md`, content, (err) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ error: 'Error al obtener el archivo Markdown' })
-      return
-    }  
-    res.json({ 
-      text: files.replace("#" ,'<h1>')
-      
-      
-      
-    })
-  })
-})
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json({ message: 'File created successfully' });
+    }
+  });
+});
 
 app.listen(3000, () => {
   console.log('Servidor iniciado en http://localhost:3000');
