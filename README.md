@@ -140,15 +140,22 @@
     
     Ejecucion:
     
+     ![Nuevo Proyecto GitHub](index2e.png)
     
 ## EJERCICIO RESUELTO POR EL DOCENTE
 -	Cree una aplicación web que ejecute javascript en el cliente (dentro de la carpeta pub) y nodejs en el servidor.
 
 Index.js:
 
+   ![Nuevo Proyecto GitHub](index3.png)
+
 Index.html:
 
+   ![Nuevo Proyecto GitHub](index3h.png)
+   
 Ejecución:
+
+   ![Nuevo Proyecto GitHub](index3e.png)
 
 -	Cree una aplicación web que realice una petición ajax en el lado del cliente y responda usando nodejs en el lado del servidor.
 -	Si tiene errores lea: https://medium.com/zero-equals-false/using-cors-in-express-cac7e29b005b
@@ -171,13 +178,15 @@ Ejecución:
   ![Nuevo Proyecto GitHub](readdir2.png)
 
       La función getFileList() se encarga de recibir la información y crea una caja de selección con los archivos Markdown disponibles en el directorio.
-      ![Nuevo Proyecto GitHub](readdir.png)
+      
   2.	Ver el contenido de un archivo Markdown traducido a HTML
   
   ![Nuevo Proyecto GitHub](Aspose.Words.83c27ca6-c496-4177-afd1-53d0e505bbf7.036.png)
       
       Se utiliza el método readFile() para poder leer el archivo que es requerido y se quiere mostrar.
       
+  ![Nuevo Proyecto GitHub](fileContent.png)
+  
       La función getFileContent() se encarga de recuperar la información del archivo que se quiere motrar.
   3.	Crear nuevos archivos MarkDown y almacenarlos en el servidor
   
